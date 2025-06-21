@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Smart Insurance | Policy Advisor</title>
+  <style>
+    @import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+
+/* === Bottom Capsule Navbar (Black with Neon Hover) === */
+.bottom-navbar {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #000000;
+  border-radius: 50px;
+  padding: 0.7rem 2rem;
+  display: flex;
+  gap: 2rem;
+  z-index: 9999;
+  border: 2px solid #1a1a1a;
+  box-shadow: 0 0 25px rgba(255, 255, 255, 0.05);
+}
+
+.bottom-link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: white;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.bottom-link .material-icons {
+  font-size: 24px;
+  margin-bottom: 3px;
+  transition: transform 0.3s ease, text-shadow 0.3s ease;
+}
+
+.bottom-link:hover {
+  color: #00f0ff;
+}
+
+.bottom-link:hover .material-icons {
+  transform: scale(1.3);
+  text-shadow: 0 0 5px #00f0ff, 0 0 10px #00f0ff;
+}
+
+    /* ========== Compact & Animated NavBar ========== */
+      .header {
+      background: linear-gradient(to right, #fac84b, #48a9e6);
+      color: #fff;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .logo {
+      font-size: 1.6rem;
+      font-weight: bold;
+    }
+
+    nav ul {
+      display: flex;
+      gap: 1.25rem;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .link {
+      text-decoration: none;
+      padding: 0.5rem 0.75rem;
+      font-size: 16px;
+      font-weight: 600;
+      color: #fefefe;
+      position: relative;
+      transition: color 0.25s ease;
+    }
+
+    .link:hover {
+      color: black;
+    }
+
+    .link::after {
+      position: absolute;
+      content: "";
+      inset: 0;
+      background-color: #fefefe;
+      scale: 1 0;
+      z-index: -1;
+      transition: scale 0.45s ease;
+      border-radius: 10px;
+    }
+
+    .link:hover::after {
+      scale: 1 1;
+    }
+
+    /* ====== Rest of Styling (Your Original) ====== */
+    :root {
+      --primary: #0a58ca;
+      --accent: #6ea8fe;
+      --light: #f9f9f9;
+      --dark: #343a40;
+      --bg: #eef4fa;
+      --radius: 12px;
+      --shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      --transition: all 0.3s ease-in-out;
+      --success: #198754;
+      --danger: #dc3545;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    body {
+      background: radial-gradient(to right, #fac84b, #48a9e6);
+      color: var(--dark);
+      line-height: 1.6;
+    }
+
+    .page-wrapper {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    .hero {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 3rem 5%;
+      background: linear-gradient(to left, #fac84b, #48a9e6);
+      color: white;
+      flex-wrap: wrap;
+    }
+
+    .hero-text h1 {
+      font-size: 2.4rem;
+      margin-bottom: 1rem;
+    }
+
+    .hero-text p {
+      font-size: 1.1rem;
+    }
+
+    .hero-img img {
+      width: 320px;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    .advisor-section {
+      padding: 3rem 5%;
+      background-color: var(--light);
+    }
+
+    .advisor-form {
+      background-color: white;
+      padding: 2rem;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      max-width: 960px;
+      margin: 0 auto;
+      transition: var(--transition);
+    }
+
+    .advisor-form:hover {
+      transform: scale(1.01);
+    }
+
+    .advisor-form h2 {
+      margin-bottom: 2rem;
+      color: var(--primary);
+      font-size: 1.8rem;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .form-group label {
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .form-group input,
+    .form-group select {
+      padding: 0.75rem 1rem;
+      border: 1px solid #ccc;
+      border-radius: var(--radius);
+      font-size: 1rem;
+      transition: var(--transition);
+    }
+
+    .form-group input:focus,
+    .form-group select:focus {
+      border-color: var(--primary);
+      background-color: #f0f8ff;
+      outline: none;
+    }
+
+    .form-footer {
+      text-align: center;
+      margin-top: 2rem;
+    }
+
+    .submit-btn {
+      background-color: var(--primary);
+      color: white;
+      padding: 0.75rem 2rem;
+      border: none;
+      border-radius: var(--radius);
+      font-size: 1rem;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .submit-btn:hover {
+      background-color: var(--accent);
+    }
+
+    .recommend-result {
+      margin-top: 2rem;
+      max-width: 960px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .result-box {
+      padding: 1.5rem;
+      background-color: #fff;
+      border-left: 5px solid var(--primary);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      font-size: 1.1rem;
+    }
+
+    .result-box h3 {
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+    }
+
+    .explain-section {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      padding: 3rem 5%;
+      background-color: var(--bg);
+    }
+
+    .explain-card {
+      flex: 1 1 300px;
+      background-color: white;
+      padding: 1.5rem;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .explain-card h3 {
+      color: var(--primary);
+      margin-bottom: 0.75rem;
+    }
+
+    .explain-card p {
+      color: var(--dark);
+    }
+
+    .footer {
+      background-color: var(--primary);
+      color: white;
+      padding: 1.2rem 0;
+      text-align: center;
+      margin-top: auto;
+    }
+
+    .footer p {
+      margin: 0.3rem 0;
+      font-size: 0.95rem;
+    }
+
+    @media screen and (max-width: 768px) {
+      .hero {
+        flex-direction: column;
+        text-align: center;
+      }
+      .hero-img img {
+        margin-top: 1.5rem;
+        width: 250px;
+      }
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const form = document.getElementById("advisorForm");
+      const resultBox = document.getElementById("recommendResult");
+
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const formData = new FormData(form);
+        const user = Object.fromEntries(formData.entries());
+
+        const age = parseInt(user.age);
+        const income = parseInt(user.income);
+        const dependents = parseInt(user.dependents);
+        const coverage = parseInt(user.coverage_need);
+        const risk = user.risk_tolerance;
+        const insuranceType = user.insurance_type;
+        const health = user.health_issues;
+        const employment = user.employment_status;
+
+        let policy = "General Plan";
+
+        if (insuranceType === "health") {
+          if (age < 30 && health === "none") {
+            policy = "Youth Wellness Plan";
+          } else if (health === "major") {
+            policy = "Critical Care Health Shield";
+          } else {
+            policy = "Balanced Health Advantage";
+          }
+        }
+
+        if (insuranceType === "life") {
+          if (dependents > 2 && income >= 50000) {
+            policy = "Family Protection Plus";
+          } else if (income < 30000) {
+            policy = "Essential Life Saver";
+          } else {
+            policy = "Standard Life Plan";
+          }
+        }
+
+        if (insuranceType === "travel") {
+          if (risk === "high") {
+            policy = "Global Risk Travel Pro";
+          } else {
+            policy = "Safe Journey Standard";
+          }
+        }
+
+        if (insuranceType === "accident") {
+          if (employment === "self-employed" || risk === "high") {
+            policy = "Accident Secure Max";
+          } else {
+            policy = "Personal Accident Shield";
+          }
+        }
+
+        if (coverage > 1000000) {
+          policy += " + High Coverage Add-on";
+        }
+
+        resultBox.innerHTML = `
+          <div class="result-box">
+            <h3>Recommended Policy:</h3>
+            <p>✅ <strong>${policy}</strong> is a good fit based on your profile.</p>
+            <p>📊 Based on age: ${age}, income: ₹${income}, risk: ${risk}, type: ${insuranceType}</p>
+          </div>
+        `;
+      });
+    });
+  </script>
+</head>
+
+<body>
+  <div class="page-wrapper">
+    <header class="header">
+      <div class="logo">Smart Insurance AI</div>
+      </header>
+    <section class="hero">
+      <div class="hero-text">
+        <h1>AI-Powered Policy Recommendation</h1>
+        <p>Find the best insurance policy tailored to your needs.</p>
+      </div>
+      <div class="hero-img">
+        <img src="/static/img/img1.png" alt="Policy Advisor">
+      </div>
+    </section>
+
+    <main class="advisor-section">
+      <form id="advisorForm" class="advisor-form">
+        <h2>Enter Your Details</h2>
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="age">Age</label>
+            <input type="number" id="age" name="age" required>
+          </div>
+          <div class="form-group">
+            <label for="income">Monthly Income (₹)</label>
+            <input type="number" id="income" name="income" required>
+          </div>
+          <div class="form-group">
+            <label for="employment_status">Employment</label>
+            <select id="employment_status" name="employment_status" required>
+              <option value="">--Select--</option>
+              <option value="salaried">Salaried</option>
+              <option value="self-employed">Self-Employed</option>
+              <option value="student">Student</option>
+              <option value="retired">Retired</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="health_issues">Health Status</label>
+            <select id="health_issues" name="health_issues" required>
+              <option value="">--Select--</option>
+              <option value="none">None</option>
+              <option value="minor">Minor</option>
+              <option value="major">Major</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="dependents">No. of Dependents</label>
+            <input type="number" id="dependents" name="dependents" required>
+          </div>
+          <div class="form-group">
+            <label for="coverage_need">Coverage Needed (₹)</label>
+            <input type="number" id="coverage_need" name="coverage_need" required>
+          </div>
+          <div class="form-group">
+            <label for="risk_tolerance">Risk Tolerance</label>
+            <select id="risk_tolerance" name="risk_tolerance" required>
+              <option value="">--Select--</option>
+              <option value="low">Low</option>
+              <option value="medium">Medium</option>
+              <option value="high">High</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="insurance_type">Insurance Type</label>
+            <select id="insurance_type" name="insurance_type" required>
+              <option value="">--Select--</option>
+              <option value="health">Health</option>
+              <option value="life">Life</option>
+              <option value="travel">Travel</option>
+              <option value="accident">Accident</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-footer">
+          <button type="submit" class="submit-btn">Recommend Policy</button>
+        </div>
+      </form>
+
+      <section class="recommend-result">
+        <div id="recommendResult" class="result-box"></div>
+      </section>
+    </main>
+
+    <section class="explain-section">
+      <div class="explain-card">
+        <h3>How It Works</h3>
+        <p>Our AI uses a rule-based algorithm combined with learning from past insurance decisions to provide recommendations.</p>
+      </div>
+      <div class="explain-card">
+        <h3>Best Match for You</h3>
+        <p>Every policy suggestion considers your lifestyle, income, risk profile, and health status.</p>
+      </div>
+    </section>
+    <div class="bottom-navbar">
+  <a href="fraud.html" class="bottom-link">
+    <span class="material-icons">home</span>
+    <span>Home</span>
+  </a>
+  <a href="/recommend.html" class="bottom-link">
+    <span class="material-icons">lightbulb</span>
+    <span>Advisor</span>
+  </a>
+  <a href="fraud.html" class="bottom-link">
+    <span class="material-icons">shield</span>
+    <span>Fraud</span>
+  </a>
+  <a href="#" class="bottom-link">
+    <span class="material-icons">chat</span>
+    <span>Chat</span>
+  </a>
+  <a href="#" class="bottom-link">
+    <span class="material-icons">account_circle</span>
+    <span>Profile</span>
+  </a>
+</div>
+
+
+    <footer class="footer">
+      <div class="footer-content">
+        <p>&copy; 2025 Smart Insurance AI | Powered by Python</p>
+        <p>Created for Interviews</p>
+      </div>
+    </footer>
+  </div>
+  
+</body>
+</html>

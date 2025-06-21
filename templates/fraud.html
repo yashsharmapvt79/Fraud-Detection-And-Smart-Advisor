@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Fraud Detection | Smart Insurance AI</title>
+    <style>
+        /* Reset + Root */
+:root {
+  --primary: #0d47a1;
+  --accent: #64b5f6;
+  --text: #1a1a1a;
+  --bg-light: #f4f6f9;
+  --bg-dark: #e3edf7;
+  --danger: #d32f2f;
+  --success: #388e3c;
+  --radius: 12px;
+  --shadow: 0 4px 12px rgba(0,0,0,0.1);
+  --gradient: linear-gradient(to right, #1e3c72, #2a5298);
+  --glass: rgba(255, 255, 255, 0.3);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+/* Page Wrapper */
+.page-wrapper {
+  min-height: 100vh;
+  background: var(--bg-light);
+  display: flex;
+  flex-direction: column;
+}
+
+/* Header */
+.header {
+  background: var(--primary);
+  padding: 1rem 2rem;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: var(--shadow);
+}
+
+.logo {
+  font-size: 1.6rem;
+  font-weight: bold;
+}
+
+.navbar a {
+  color: #fff;
+  margin-left: 1.5rem;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.navbar a:hover {
+  color: var(--accent);
+}
+
+/* Hero Section */
+.intro {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 3rem 5%;
+  background: var(--gradient);
+  color: white;
+}
+
+.intro-content h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.intro-content p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+.intro-img img {
+  width: 350px;
+  animation: float 4s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-12px);
+  }
+}
+
+/* Form Layout */
+.form-wrapper {
+  background: var(--bg-dark);
+  padding: 3rem 5%;
+  border-top: 5px solid var(--primary);
+}
+
+.fraud-form {
+  background: white;
+  border-radius: var(--radius);
+  padding: 2rem;
+  box-shadow: var(--shadow);
+  transition: all 0.3s ease;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.fraud-form:hover {
+  transform: scale(1.005);
+}
+
+.fraud-form h2 {
+  margin-bottom: 1.5rem;
+  color: var(--text);
+  font-size: 1.8rem;
+  border-bottom: 2px solid var(--primary);
+  padding-bottom: 0.5rem;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: #333;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid #ccc;
+  border-radius: var(--radius);
+  transition: 0.3s;
+  font-size: 1rem;
+}
+
+.form-group input:focus {
+  border-color: var(--primary);
+  outline: none;
+  background: #eef4fb;
+}
+
+.form-footer {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.submit-btn {
+  background: var(--primary);
+  color: white;
+  padding: 0.9rem 2.5rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.submit-btn:hover {
+  background: var(--accent);
+}
+
+/* Result Section */
+.result-container {
+  margin-top: 2rem;
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.result-box {
+  padding: 1.5rem;
+  background: var(--glass);
+  backdrop-filter: blur(10px);
+  border-left: 5px solid var(--primary);
+  border-radius: var(--radius);
+  color: var(--text);
+  font-size: 1.1rem;
+  box-shadow: var(--shadow);
+}
+
+/* Info Section */
+.info-section {
+  display: flex;
+  gap: 2rem;
+  padding: 3rem 5%;
+  background: white;
+  flex-wrap: wrap;
+}
+
+.info-box {
+  flex: 1 1 300px;
+  background: var(--bg-dark);
+  padding: 1.5rem;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.info-box h3 {
+  color: var(--primary);
+  margin-bottom: 0.75rem;
+}
+
+.info-box p {
+  color: #444;
+  line-height: 1.6;
+}
+
+/* Footer */
+.footer {
+  background: var(--primary);
+  color: white;
+  text-align: center;
+  padding: 1rem;
+  margin-top: auto;
+}
+
+.footer p {
+  margin: 0.3rem 0;
+  font-size: 0.95rem;
+}
+
+/* Responsive Tweaks */
+@media screen and (max-width: 768px) {
+  .intro {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .intro-img img {
+    width: 250px;
+    margin-top: 1.5rem;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .result-box {
+    font-size: 1rem;
+  }
+}
+
+        </style>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+  const form = document.getElementById("fraudForm");
+  const resultBox = document.getElementById("fraudResult");
+
+  if (!form || !resultBox) return;
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    resultBox.innerHTML = `<p class="loading">🧠 Analyzing claim...</p>`;
+
+    const formData = new FormData(form);
+    const jsonData = {};
+
+    for (const [key, value] of formData.entries()) {
+      jsonData[key] = Number(value);
+    }
+
+    try {
+      const response = await fetch("/predict_fraud", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(jsonData),
+      });
+
+      if (!response.ok) {
+        throw new Error("Prediction API failed.");
+      }
+
+      const result = await response.json();
+      renderResult(result);
+    } catch (error) {
+      resultBox.innerHTML = `
+        <div class="result-box error">
+          <h3>❌ Prediction Failed</h3>
+          <p>${error.message}</p>
+        </div>
+      `;
+    }
+  });
+
+  function renderResult(result) {
+    if (result.error) {
+      resultBox.innerHTML = `
+        <div class="result-box error">
+          <h3>⚠️ Error</h3>
+          <p>${result.error}</p>
+        </div>
+      `;
+      return;
+    }
+
+    const { fraud_prediction, confidence } = result;
+    const color = fraud_prediction === "Fraudulent" ? "#dc3545" : "#198754";
+
+    resultBox.innerHTML = `
+      <div class="result-box" style="border-left: 5px solid ${color}">
+        <h3>Fraud Detection Result:</h3>
+        <p>🔍 Status: <strong>${fraud_prediction}</strong></p>
+        <p>📈 Confidence: ${confidence}%</p>
+      </div>
+    `;
+  }
+});
+
+    </script>
+</head>
+<body>
+  <header class="header">
+  <div class="logo">Smart Insurance AI</div>
+  <nav class="navbar">
+  <a href="/" class="nav-link active">Fraud Detection</a>
+  <a href="/recommend.html" class="nav-link">Smart Advisor</a>
+</nav>
+
+</nav>
+
+</header>
+    <div class="page-wrapper">
+        <section class="intro">
+            <div class="intro-content">
+                <h1>Insurance Fraud Detection</h1>
+                <p>Our AI system analyzes claim details to detect potential fraud.</p>
+            </div>
+            <div class="intro-img">
+                <img src="/static/img/img1.png" alt="Fraud Detection Illustration"/>
+            </div>
+        </section>
+
+        <main class="form-wrapper">
+            <form id="fraudForm" class="fraud-form">
+                <h2>Claimant & Claim Details</h2>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="claim_amount">Claim Amount (₹)</label>
+                        <input type="number" id="claim_amount" name="claim_amount" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="age">Age</label>
+                        <input type="number" id="age" name="age" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="region_code">Region Code</label>
+                        <input type="number" id="region_code" name="region_code" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="days_since_policy">Days Since Policy Start</label>
+                        <input type="number" id="days_since_policy" name="days_since_policy" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="num_dependents">Number of Dependents</label>
+                        <input type="number" id="num_dependents" name="num_dependents" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="hospital_code">Hospital Code</label>
+                        <input type="number" id="hospital_code" name="hospital_code" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="is_self_employed">Self-Employed? (1 = Yes, 0 = No)</label>
+                        <input type="number" min="0" max="1" id="is_self_employed" name="is_self_employed" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="past_claims">Past Claims</label>
+                        <input type="number" id="past_claims" name="past_claims" required />
+                    </div>
+                </div>
+                <div class="form-footer">
+                    <button type="submit" class="submit-btn">Detect Fraud</button>
+                </div>
+            </form>
+
+            <section class="result-container">
+                <div id="fraudResult" class="result-box">
+                    <!-- JS-injected prediction result will appear here -->
+                </div>
+            </section>
+        </main>
+
+        <section class="info-section">
+            <div class="info-box">
+                <h3>How It Works</h3>
+                <p>The model evaluates your inputs using a trained ML algorithm to assess fraud probability.</p>
+                <p>A high confidence score in fraud indicates that the system found suspicious patterns.</p>
+            </div>
+            <div class="info-box">
+                <h3>Security Notice</h3>
+                <p>All data is processed locally and securely. No personal identifiers are stored or shared.</p>
+            </div>
+        </section>
+
+        <footer class="footer">
+            <div class="footer-content">
+                <p>&copy; 2025 Smart Insurance AI. All rights reserved.</p>
+                <p>Built using Flask, Python, HTML5, CSS3, and JavaScript.</p>
+            </div>
+        </footer>
+    </div>
+</body>
+<script defer src="{{ url_for('static', filename='js/fraud.js') }}"></script>
+</html>
